@@ -71,7 +71,7 @@ class Stime{
         if(isset($data['message']['text']) && $data['message']['text'] =='/timezones'){
             $getQuery = array(
                 "chat_id"=>$this->user_id,
-                "text"=>'ss',
+                "text"=>'All Continents',
                 "parse_mode"=>"html",
                 "reply_markup"=>json_encode(
                     array(
@@ -128,7 +128,7 @@ class Stime{
             $all_cities = (array) json_decode(file_get_contents('cities.json'));
             $getQuery = array(
                 "chat_id"=>$this->user_id,
-                "text"=>'ghf',
+                "text"=>'All Cities and zones',
                 "parse_mode"=>"html",
                 "reply_markup"=>json_encode(
                     array(
@@ -145,7 +145,7 @@ class Stime{
             $all = $this->sendRequest('GET',self::API_URL_TIME."/zone?timeZone=".$data['callback_query']['data']);
             $getQuery = array(
                 "chat_id"=>$this->user_id,
-                "text"=>$all->dateTime,
+                "text"=>"date: ".$all->day."-".$all->month."-".$all->year.PHP_EOL."time: ".$all->hour.":".$all->minute,
                 "parse_mode"=>"html",
             );
             $this->sendRequest('GET',self::API_URL_TG.self::TOKEN_TG."/sendMessage?".http_build_query($getQuery));
